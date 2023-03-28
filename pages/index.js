@@ -5,7 +5,7 @@ export default function Home() {
     return (
         <div className="">
             <PopuralNews />
-            <Publishers />
+            {/* <Publishers /> */}
         </div>
     );
 }

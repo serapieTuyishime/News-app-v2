@@ -1,12 +1,14 @@
 import { useLazyGetPopuralArticlesQuery } from "@/services/news";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import FullNewsItem from "./FullNewsItem";
 import NewsContainer from "./NewsContainer";
 
 const PopuralNews = () => {
     const popuralNewsUrl = useSelector((state) => state.news.popuralNewsUrl);
     const popuralNews = useSelector((state) => state.news.popuralNews);
     const [trigger, AllNews] = useLazyGetPopuralArticlesQuery();
+
     return (
         <div>
             {
@@ -32,6 +34,7 @@ const PopuralNews = () => {
                 // <div>{JSON.stringify(AllNews)}</div>
             }
             <NewsContainer news={popuralNews.articles} />
+            <FullNewsItem />
         </div>
     );
 };

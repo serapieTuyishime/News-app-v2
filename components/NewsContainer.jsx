@@ -18,6 +18,7 @@ const NewsContainer = ({ news = [] }) => {
                                 urlToImage={urlToImage}
                                 title={source.title}
                                 url={url}
+                                id={source.id}
                             />
                         </div>
                     );

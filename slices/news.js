@@ -22,6 +22,17 @@ export const newsSlice = createSlice({
                 },
             ],
         },
+        currentNewsitem: {
+            title: "None",
+            source: { id: "234", name: "No name" },
+            author: "None",
+            description: "None",
+            url: "https://www.handelsblatt.com/unternehmen/industrie/elektro-suv-von-togg-tesla-herausforderer-wird-teurer-als-erwartet/29042788.html",
+            urlToImage:
+                "https://www.handelsblatt.com/images/togg-prototyp/28542374/4-format2003.jpg",
+            publishedAt: "12-12-1200",
+            content: "None",
+        },
     },
     reducers: {
         add: (state, action) => {
@@ -31,8 +42,14 @@ export const newsSlice = createSlice({
             let returnedNews = action.payload;
             state.popuralNews = Object.keys(returnedNews.data);
         },
+        loadNewsItemById: (state, action) => {
+            state.currentNewsitem = state.popuralNews.data.articles.filter(
+                (newsItem) => newsItem.source.id === action.payload
+            );
+            console.log(JSON.stringify(state.currentNewsitem));
+        },
     },
 });
 
-export const { add, loadPopuralNews } = newsSlice.actions;
+export const { add, loadPopuralNews, loadNewsItemById } = newsSlice.actions;
 export default newsSlice.reducer;
