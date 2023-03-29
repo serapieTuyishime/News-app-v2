@@ -39,14 +39,12 @@ export const newsSlice = createSlice({
             state.popuralNewsUrl = "/";
         },
         loadPopuralNews: (state, action) => {
-            let returnedNews = action.payload;
-            state.popuralNews = Object.keys(returnedNews.data);
+            state.popuralNews = action.payload;
         },
         loadNewsItemById: (state, action) => {
             state.currentNewsitem = state.popuralNews.data.articles.filter(
                 (newsItem) => newsItem.source.id === action.payload
             );
-            console.log(JSON.stringify(state.currentNewsitem));
         },
     },
 });

@@ -13,25 +13,27 @@ const FullNewsItem = () => {
         urlToImage,
         publishedAt,
         content,
-    } = currentNewsitem;
+    } = currentNewsitem[0];
     return (
-        <div className="grid gap-4">
-            <label className="font-bold text-xl">{title}</label>
+        <div className="flex flex-col gap-4">
+            <label className="text-xl font-bold">{title}</label>
             <div className="grid">
                 <label className="text-light">BY {author}</label>
                 <label className="text-light">Updated on {publishedAt}</label>
             </div>
-            <div className="h-[20rem] w-full">
+            <div className="h-[20rem] grid w-full">
                 <img
                     src={urlToImage}
-                    className="w-full h-full object-cover"
+                    className="object-cover w-full h-full"
                     alt={source.id ? source.id : title}
                     width={400}
                     height={200}
                 />
-                <label className="text-light italic">{description}</label>
             </div>
-            <div>{content}</div>
+            <label className="italic text-blue-300 text-light">
+                {description}
+            </label>
+            <div className="text-red-400">{content}</div>
         </div>
     );
 };
