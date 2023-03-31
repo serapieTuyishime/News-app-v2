@@ -33,9 +33,7 @@ const PopuralNews = () => {
                             Object.values(AllNews.data.articles[0])
                         )} */}
                         <br />
-                        <NewsContainer
-                            news={AllNews.data.articles.slice(0, 10)}
-                        />
+                        <NewsContainer />
                     </div>
                 ) : null
 

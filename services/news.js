@@ -19,8 +19,15 @@ export const newsApi = createApi({
             query: () =>
                 "https://newsapi.org/v2/top-headlines/sources?apiKey=4f0b70fd7dd84b25837caa68f5b8d053",
         }),
+        getNewsByPublishers: builder.query({
+            query: (name) =>
+                `https://newsapi.org/v2/top-headlines/?sources=${name}&apiKey=4f0b70fd7dd84b25837caa68f5b8d053`,
+        }),
     }),
 });
 
-export const { useLazyGetPopuralArticlesQuery, useGetTopPublishersQuery } =
-    newsApi;
+export const {
+    useLazyGetPopuralArticlesQuery,
+    useGetTopPublishersQuery,
+    useLazyGetNewsByPublishersQuery,
+} = newsApi;

@@ -1,8 +1,7 @@
-import Image from "next/image";
 import React from "react";
 import { useSelector } from "react-redux";
 
-const FullNewsItem = () => {
+export default function OneNewsItem() {
     const currentNewsitem = useSelector((state) => state.news.currentNewsitem);
     const {
         title,
@@ -36,6 +35,4 @@ const FullNewsItem = () => {
             <div className="text-red-400">{content}</div>
         </div>
     );
-};
-
-export default FullNewsItem;
+}
