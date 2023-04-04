@@ -35,6 +35,7 @@ export const newsSlice = createSlice({
             publishedAt: "12-12-1200",
             content: "None",
         },
+        isFullArticleVisible: false,
     },
     reducers: {
         loadPopuralNews: (state, action) => {
@@ -44,9 +45,17 @@ export const newsSlice = createSlice({
             state.currentNewsitem = state.popuralNews.data.articles.filter(
                 (newsItem) => newsItem.title === action.payload
             )[0];
+            state.currentNewsitem = true;
+        },
+        changeVisibilityOfFullAtricle: (state) => {
+            state.isFullArticleVisible = !state.isFullArticleVisible;
         },
     },
 });
 
-export const { loadPopuralNews, loadNewsItemById } = newsSlice.actions;
+export const {
+    loadPopuralNews,
+    loadNewsItemById,
+    changeVisibilityOfFullAtricle,
+} = newsSlice.actions;
 export default newsSlice.reducer;

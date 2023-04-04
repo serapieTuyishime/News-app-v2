@@ -17,21 +17,21 @@ const NewsItem = ({
     const router = useRouter();
     return (
         <div
-            // onClick={() => {
-            //     dispatch(loadNewsItemById(title));
-            //     router.push("pages/News/Index.jsx");
-            // }}
+            onClick={() => {
+                dispatch(loadNewsItemById(title));
+                // router.push("/news/OneNewsItem");
+            }}
             className="flex w-full gap-3 p-2 overflow-hidden border border-blue-400 rounded max-h-56 hover:cursor-pointer"
         >
             <div className="grid w-3/5 gap-2">
                 <div className="flex gap-3">
-                    <Link href={"pages/news/OneNewsItem.jsx"}>
+                    <label>
                         <img
                             src={urlToImage}
                             alt="Author"
                             className="object-cover w-12 h-12 rounded-full"
                         />
-                    </Link>
+                    </label>
                     <div className="grid">
                         <label className="font-bold">{author}</label>
                         <label className="text-sm italic">{publishedAt}</label>
