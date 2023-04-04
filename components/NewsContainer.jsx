@@ -2,9 +2,16 @@ import { useSelector } from "react-redux";
 import NewsItem from "./NewsItem";
 
 const NewsContainer = () => {
-    const news = useSelector((state) =>
+    const FetchNews = useSelector((state) =>
         state.news.popuralNews.data.articles.slice(0, 10)
     );
+    let news = FetchNews;
+    const textToSearch = useSelector((state) => state.news.textToSearch);
+    if (textToSearch !== "") {
+        news = FetchNews.filter((article) =>
+            article.title.toLowerCase().includes(textToSearch.toLowerCase())
+        );
+    }
     return (
         <div className="flex flex-wrap gap-4">
             {/* {JSON.stringify(Object.keys(news[0]))} */}

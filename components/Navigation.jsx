@@ -1,15 +1,23 @@
-import { searchByText } from "@/slices/news";
+import { updateTextToSearchwith } from "@/slices/news";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 const Navigation = () => {
     const dispatch = useDispatch();
+
+    const [searchText, setSearchText] = useState("");
     return (
         <div className="flex gap-6 items-center py-6">
             <input
                 type="search"
                 placeholder="Search by news articles "
                 className="rounded-3xl px-4 py-2 border outline-none border-gray-400"
-                onChange={(e) => dispatch(searchByText(e.target.value))}
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                onKeyUp={(e) => {
+                    if (e.key === "Enter")
+                        dispatch(updateTextToSearchwith(searchText));
+                }}
             />
             <label className="text-mute">Tags</label>
             <label

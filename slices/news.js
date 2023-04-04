@@ -38,6 +38,7 @@ export const newsSlice = createSlice({
         },
         isFullArticleVisible: false,
         unmanipulatedNewsArticles: [],
+        textToSearch: "",
     },
     reducers: {
         loadPopuralNews: (state, action) => {
@@ -53,13 +54,8 @@ export const newsSlice = createSlice({
             )[0];
             state.isFullArticleVisible = true;
         },
-        searchByText: (state, action) => {
-            // let popuralArticlesHere = current(state.popuralNews);
-            // let things = popuralArticlesHere.data.articles.filter((article) =>
-            //     article.title.includes(action.payload)
-            // );
-
-            console.log(action.payload);
+        updateTextToSearchwith: (state, action) => {
+            state.textToSearch = action.payload;
         },
     },
 });
@@ -68,6 +64,6 @@ export const {
     loadPopuralNews,
     loadNewsItemById,
     changeVisibilityOfFullAtricle,
-    searchByText,
+    updateTextToSearchwith,
 } = newsSlice.actions;
 export default newsSlice.reducer;
