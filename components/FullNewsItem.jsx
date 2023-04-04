@@ -35,7 +35,7 @@ const FullNewsItem = () => {
                     <img
                         src={urlToImage}
                         className="object-cover w-full h-full"
-                        alt={source.id ? source.id : title}
+                        alt={title}
                         width={400}
                         height={200}
                     />

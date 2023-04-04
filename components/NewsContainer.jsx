@@ -7,7 +7,7 @@ const NewsContainer = () => {
     );
     return (
         <div className="flex flex-wrap gap-4">
-            {JSON.stringify(Object.keys(news[0]))}
+            {/* {JSON.stringify(Object.keys(news[0]))} */}
             {news.map(
                 (
                     {

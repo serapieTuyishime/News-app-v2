@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
+import { useMemo } from "react";
 
 export const newsSlice = createSlice({
     name: "news",
@@ -36,19 +37,29 @@ export const newsSlice = createSlice({
             content: "None",
         },
         isFullArticleVisible: false,
+        unmanipulatedNewsArticles: [],
     },
     reducers: {
         loadPopuralNews: (state, action) => {
             state.popuralNews = action.payload;
+            state.unmanipulatedNewsArticles = action.payload;
+        },
+        changeVisibilityOfFullAtricle: (state) => {
+            state.isFullArticleVisible = !state.isFullArticleVisible;
         },
         loadNewsItemById: (state, action) => {
             state.currentNewsitem = state.popuralNews.data.articles.filter(
                 (newsItem) => newsItem.title === action.payload
             )[0];
-            state.currentNewsitem = true;
+            state.isFullArticleVisible = true;
         },
-        changeVisibilityOfFullAtricle: (state) => {
-            state.isFullArticleVisible = !state.isFullArticleVisible;
+        searchByText: (state, action) => {
+            // let popuralArticlesHere = current(state.popuralNews);
+            // let things = popuralArticlesHere.data.articles.filter((article) =>
+            //     article.title.includes(action.payload)
+            // );
+
+            console.log(action.payload);
         },
     },
 });
@@ -57,5 +68,6 @@ export const {
     loadPopuralNews,
     loadNewsItemById,
     changeVisibilityOfFullAtricle,
+    searchByText,
 } = newsSlice.actions;
 export default newsSlice.reducer;

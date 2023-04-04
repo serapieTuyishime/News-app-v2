@@ -5,14 +5,18 @@ import Navigation from "@/components/Navigation";
 
 export default function Home() {
     return (
-        <div className="flex h-screen">
-            <div className="w-3/4 h-full pl-4 overflow-scroll">
-                <Navigation />
-                <FullNewsItem />
-                <PopuralNews />
-            </div>
-            <div className="w-1/4 pl-2 ">
-                <Publishers />
+        <div className="grid gap-3 ">
+            <Navigation />
+
+            <div className="flex h-screen">
+                <div className="grid w-3/4">
+                    <FullNewsItem />
+
+                    <div className=" h-full pl-4 overflow-scroll">
+                        <PopuralNews />
+                    </div>
+                </div>
+                <div className="w-1/4 pl-2 ">{/* <Publishers /> */}</div>
             </div>
         </div>
     );

@@ -19,7 +19,6 @@ const NewsItem = ({
         <div
             onClick={() => {
                 dispatch(loadNewsItemById(title));
-                // router.push("/news/OneNewsItem");
             }}
             className="flex w-full gap-3 p-2 overflow-hidden border border-blue-400 rounded max-h-56 hover:cursor-pointer"
         >
