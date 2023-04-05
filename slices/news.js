@@ -1,3 +1,4 @@
+import today from "@/utils/dateHelper";
 import { createSlice, current } from "@reduxjs/toolkit";
 import { useMemo } from "react";
 
@@ -39,6 +40,7 @@ export const newsSlice = createSlice({
         isFullArticleVisible: false,
         unmanipulatedNewsArticles: [],
         textToSearch: "",
+        todayDate: today,
     },
     reducers: {
         loadPopuralNews: (state, action) => {

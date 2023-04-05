@@ -1,9 +1,10 @@
 import { updateTextToSearchwith } from "@/slices/news";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Navigation = () => {
     const dispatch = useDispatch();
+    const todayDate = useSelector((state) => state.news.todayDate);
 
     const [searchText, setSearchText] = useState("");
     return (
@@ -36,7 +37,7 @@ const Navigation = () => {
                 className="bg-gray-200 rounded-full px-4 pt-1 pb-2 font-bold
             "
             >
-                Technology
+                {todayDate.toLocaleDateString().replaceAll("/", "-")}
             </label>
         </div>
     );
