@@ -22,8 +22,8 @@ const Publishers = () => {
             {AllPublishers.isSuccess ? (
                 <div className="grid gap-4">
                     {AllPublishers.data.sources
-                        .slice(0, 10)
-                        .map((publisher, index) => {
+                        .slice(0, 30)
+                        .map((publisher) => {
                             return (
                                 <div
                                     className="cursor-pointer"

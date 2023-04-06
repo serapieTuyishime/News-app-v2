@@ -8,7 +8,7 @@ const Navigation = () => {
 
     const [searchText, setSearchText] = useState("");
     return (
-        <div className="flex gap-6 items-center py-6">
+        <div className="flex gap-6 items-center place-content-center py-6">
             <input
                 type="search"
                 placeholder="Search by news articles "
@@ -37,7 +37,7 @@ const Navigation = () => {
                 className="bg-gray-200 rounded-full px-4 pt-1 pb-2 font-bold
             "
             >
-                {todayDate.toLocaleDateString().replaceAll("/", "-")}
+                {todayDate}
             </label>
         </div>
     );

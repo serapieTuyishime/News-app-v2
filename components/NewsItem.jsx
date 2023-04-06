@@ -1,8 +1,6 @@
-import React from "react";
-import { loadNewsItemById } from "@/slices/news";
+import { useLazyGetNewsByPublishersQuery } from "@/services/news";
+import { loadNewsItemById, loadPopuralNews } from "@/slices/news";
 import { useDispatch } from "react-redux";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 const NewsItem = ({
     author,
@@ -14,38 +12,58 @@ const NewsItem = ({
     name,
 }) => {
     const dispatch = useDispatch();
-    const router = useRouter();
+    const [trigger] = useLazyGetNewsByPublishersQuery();
+    async function getNews(publisherId) {
+        const NewsByPublisher = await trigger(publisherId);
+        dispatch(loadPopuralNews(NewsByPublisher));
+    }
     return (
-        <div
-            onClick={() => {
-                dispatch(loadNewsItemById(title));
-            }}
-            className="flex w-full gap-3 p-2 overflow-hidden border border-blue-400 rounded max-h-56 hover:cursor-pointer"
-        >
+        <div className=" lg:w-4/5 mx-auto flex w-full gap-3 p-2 overflow-hidden pb-3 mt-3 border-b-gray-300 rounded max-h-60 hover:cursor-pointer">
             <div className="grid w-3/5 gap-2">
-                <div className="flex gap-3">
-                    <label>
+                <div className="flex justify-between">
+                    <div className="flex items-center gap-3 ">
                         <img
                             src={urlToImage}
                             alt="Author"
                             className="object-cover w-12 h-12 rounded-full"
                         />
-                    </label>
-                    <div className="grid">
-                        <label className="font-bold">{author}</label>
-                        <label className="text-sm italic">{publishedAt}</label>
+                        <div className="grid">
+                            <label className="font-bold">{author}</label>
+                            <label className="text-sm italic">
+                                {publishedAt}
+                            </label>
+                        </div>
+                    </div>
+                    <div
+                        className="cursor-pointer"
+                        onClick={() => {
+                            getNews(name);
+                        }}
+                    >
+                        {name}
                     </div>
                 </div>
-                <div className="grid gap-3">
-                    <span className="font-bold">{title}</span>
-                    <span className="">{description}</span>
+                <div
+                    className="grid gap-3"
+                    onClick={() => {
+                        dispatch(loadNewsItemById(title));
+                    }}
+                >
+                    <span className="font-bold">{title.substring(0, 150)}</span>
+                    <span className="">
+                        {/* {description.substring(0, 120)} ... */}
+                        {description} ...
+                        <span className="text-gray-400 pl-2 font-bold">
+                            Road more
+                        </span>
+                    </span>
                 </div>
             </div>
             <div className="w-2/5">
                 <img
                     src={urlToImage}
                     alt={title}
-                    className="object-contain w-full h-full"
+                    className="rounded-3xl object-cover w-full h-full"
                 />
             </div>
         </div>

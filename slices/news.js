@@ -1,12 +1,11 @@
-import today from "@/utils/dateHelper";
-import { createSlice, current } from "@reduxjs/toolkit";
-import { useMemo } from "react";
+import { today, oneMonthAgo } from "@/utils/dateHelper";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const newsSlice = createSlice({
     name: "news",
     initialState: {
-        popuralNewsUrl:
-            "https://newsapi.org/v2/everything?q=apple&from=2023-03-27&to=2023-03-27&sortBy=popularity&apiKey=4f0b70fd7dd84b25837caa68f5b8d053",
+        // popuralNewsUrl: `https://newsapi.org/v2/everything?q=apple&from=${today}&to=${today}&sortBy=popularity&apiKey=4f0b70fd7dd84b25837caa68f5b8d053`,
+        popuralNewsUrl: `https://newsapi.org/v2/top-headlines?language=en&pageSize=10&apiKey=4f0b70fd7dd84b25837caa68f5b8d053`,
         popuralNews: {
             data: {
                 articles: [
@@ -40,7 +39,6 @@ export const newsSlice = createSlice({
         isFullArticleVisible: false,
         unmanipulatedNewsArticles: [],
         textToSearch: "",
-        todayDate: today,
     },
     reducers: {
         loadPopuralNews: (state, action) => {

@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import NewsItem from "./NewsItem";
 
 const NewsContainer = () => {
-    const FetchNews = useSelector((state) =>
-        state.news.popuralNews.data.articles.slice(0, 10)
+    const FetchNews = useSelector(
+        (state) => state.news.popuralNews.data.articles
     );
     let news = FetchNews;
     const textToSearch = useSelector((state) => state.news.textToSearch);
@@ -13,7 +13,7 @@ const NewsContainer = () => {
         );
     }
     return (
-        <div className="flex flex-wrap gap-4">
+        <div className="grid divide-y-2 gap-6">
             {/* {JSON.stringify(Object.keys(news[0]))} */}
             {news.map(
                 (
