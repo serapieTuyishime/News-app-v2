@@ -19,7 +19,7 @@ const PopuralNews = () => {
         waitForDataToBeLoaded();
     }, []);
     return (
-        <div className="grid gap-4">
+        <div className="grid sm:w-3/4 mx-auto gap-4">
             <TitleElement title="Popural news" />
             <NewsContainer />
         </div>

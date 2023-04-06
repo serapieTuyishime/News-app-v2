@@ -1,11 +1,10 @@
-import { today, oneMonthAgo } from "@/utils/dateHelper";
+import { API_KEY, MAXIMUN_FETCH_SIZE, NEWS_API_URL } from "@/config/Variables";
 import { createSlice } from "@reduxjs/toolkit";
 
 export const newsSlice = createSlice({
     name: "news",
     initialState: {
-        // popuralNewsUrl: `https://newsapi.org/v2/everything?q=apple&from=${today}&to=${today}&sortBy=popularity&apiKey=4f0b70fd7dd84b25837caa68f5b8d053`,
-        popuralNewsUrl: `https://newsapi.org/v2/top-headlines?language=en&pageSize=10&apiKey=4f0b70fd7dd84b25837caa68f5b8d053`,
+        popuralNewsUrl: `${NEWS_API_URL}?language=en&pageSize=${MAXIMUN_FETCH_SIZE}&apiKey=${API_KEY}`,
         popuralNews: {
             data: {
                 articles: [

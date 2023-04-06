@@ -14,11 +14,12 @@ const NewsItem = ({
     const dispatch = useDispatch();
     const [trigger] = useLazyGetNewsByPublishersQuery();
     async function getNews(publisherId) {
-        const NewsByPublisher = await trigger(publisherId);
+        const slugPublisherId = publisherId.toLowerCase().split(" ").join("-");
+        const NewsByPublisher = await trigger(slugPublisherId);
         dispatch(loadPopuralNews(NewsByPublisher));
     }
     return (
-        <div className=" lg:w-4/5 mx-auto flex w-full gap-3 p-2 overflow-hidden pb-3 mt-3 border-b-gray-300 rounded max-h-60 hover:cursor-pointer">
+        <div className="flex w-full gap-3 p-2 overflow-hidden pb-3 mt-3 border-b-gray-300 rounded max-h-60 hover:cursor-pointer">
             <div className="grid w-3/5 gap-2">
                 <div className="flex justify-between">
                     <div className="flex items-center gap-3 ">

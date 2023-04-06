@@ -1,3 +1,4 @@
+import { API_KEY, NEWS_API_URL } from "@/config/Variables";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { HYDRATE } from "next-redux-wrapper";
 
@@ -16,12 +17,11 @@ export const newsApi = createApi({
             query: (name) => `${name}`,
         }),
         getTopPublishers: builder.query({
-            query: () =>
-                "https://newsapi.org/v2/top-headlines/sources?apiKey=4f0b70fd7dd84b25837caa68f5b8d053",
+            query: () => `${NEWS_API_URL}sources?apiKey=${API_KEY}`,
         }),
         getNewsByPublishers: builder.query({
             query: (name) =>
-                `https://newsapi.org/v2/top-headlines/?sources=${name}&apiKey=4f0b70fd7dd84b25837caa68f5b8d053`,
+                `${NEWS_API_URL}?sources=${name}&apiKey=${API_KEY}`,
         }),
     }),
 });

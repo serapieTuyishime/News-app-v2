@@ -37,6 +37,7 @@ const Navigation = () => {
                 className="bg-gray-200 rounded-full px-4 pt-1 pb-2 font-bold
             "
             >
+                Business
                 {todayDate}
             </label>
         </div>
