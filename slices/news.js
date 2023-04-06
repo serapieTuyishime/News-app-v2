@@ -36,13 +36,11 @@ export const newsSlice = createSlice({
             content: "None",
         },
         isFullArticleVisible: false,
-        unmanipulatedNewsArticles: [],
         textToSearch: "",
     },
     reducers: {
         loadPopuralNews: (state, action) => {
             state.popuralNews = action.payload;
-            state.unmanipulatedNewsArticles = action.payload;
         },
         changeVisibilityOfFullAtricle: (state) => {
             state.isFullArticleVisible = !state.isFullArticleVisible;

@@ -17,11 +17,12 @@ export const newsApi = createApi({
             query: (name) => `${name}`,
         }),
         getTopPublishers: builder.query({
-            query: () => `${NEWS_API_URL}sources?apiKey=${API_KEY}`,
+            query: () => `${NEWS_API_URL}/sources?apiKey=${API_KEY}`,
         }),
         getNewsByPublishers: builder.query({
-            query: (name) =>
-                `${NEWS_API_URL}?sources=${name}&apiKey=${API_KEY}`,
+            query: (name) => {
+                `${NEWS_API_URL}/sources=${name}?apiKey=${API_KEY}`;
+            },
         }),
     }),
 });

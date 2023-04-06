@@ -15,6 +15,7 @@ const Publishers = () => {
     async function getNews(publisherId) {
         const NewsByPublisher = await trigger(publisherId);
         dispatch(loadPopuralNews(NewsByPublisher));
+        console.log(NewsByPublisher);
     }
     return (
         <div className="grid gap-3">

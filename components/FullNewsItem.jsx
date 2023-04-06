@@ -1,6 +1,6 @@
 import { changeVisibilityOfFullAtricle } from "@/slices/news";
 import { useDispatch, useSelector } from "react-redux";
-import CustomLink from "./CustomLink";
+import CustomLink from "./ui/CustomLink";
 
 const FullNewsItem = () => {
     const currentNewsitem = useSelector((state) => state.news.currentNewsitem);
