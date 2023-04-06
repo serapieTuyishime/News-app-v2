@@ -6,18 +6,18 @@ import NewsContainer from "./NewsContainer";
 import TitleElement from "./TitleElement";
 
 const PopuralNews = () => {
-    const popuralNewsUrl = useSelector((state) => state.news.popuralNewsUrl);
-    const [trigger] = useLazyGetPopuralArticlesQuery();
-    const dispatch = useDispatch();
+    // const popuralNewsUrl = useSelector((state) => state.news.popuralNewsUrl);
+    // const [trigger] = useLazyGetPopuralArticlesQuery();
+    // const dispatch = useDispatch();
 
-    async function waitForDataToBeLoaded() {
-        const allData = await trigger(popuralNewsUrl);
-        dispatch(loadPopuralNews(allData));
-    }
+    // async function waitForDataToBeLoaded() {
+    //     const allData = await trigger(popuralNewsUrl);
+    //     dispatch(loadPopuralNews(allData));
+    // }
 
-    useEffect(() => {
-        waitForDataToBeLoaded();
-    }, []);
+    // useEffect(() => {
+    //     waitForDataToBeLoaded();
+    // }, []);
     return (
         <div className="grid sm:w-3/4 mx-auto gap-4">
             <TitleElement title="Popural news" />

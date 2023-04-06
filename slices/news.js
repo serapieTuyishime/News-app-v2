@@ -37,6 +37,7 @@ export const newsSlice = createSlice({
         },
         isFullArticleVisible: false,
         textToSearch: "",
+        fetchingError: "This is the error element",
     },
     reducers: {
         loadPopuralNews: (state, action) => {
@@ -54,6 +55,9 @@ export const newsSlice = createSlice({
         updateTextToSearchwith: (state, action) => {
             state.textToSearch = action.payload;
         },
+        throwError: (state, action) => {
+            state.fetchingError = action.payload;
+        },
     },
 });
 
@@ -62,5 +66,6 @@ export const {
     loadNewsItemById,
     changeVisibilityOfFullAtricle,
     updateTextToSearchwith,
+    throwError,
 } = newsSlice.actions;
 export default newsSlice.reducer;
