@@ -37,11 +37,12 @@ export const newsSlice = createSlice({
         },
         isFullArticleVisible: false,
         textToSearch: "",
-        fetchingError: "This is the error element",
+        fetchingError: "",
     },
     reducers: {
         loadPopuralNews: (state, action) => {
             state.popuralNews = action.payload;
+            console.log(state.popuralNews);
         },
         changeVisibilityOfFullAtricle: (state) => {
             state.isFullArticleVisible = !state.isFullArticleVisible;

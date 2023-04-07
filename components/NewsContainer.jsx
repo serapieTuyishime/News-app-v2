@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import NewsItem from "./NewsItem";
 
@@ -8,6 +7,7 @@ const NewsContainer = () => {
     );
     let news = [];
     const textToSearch = useSelector((state) => state.news.textToSearch);
+    const errorText = useSelector((state) => state.news.fetchingError);
     if (textToSearch !== "") {
         news = FetchNews.filter((article) =>
             article.title.toLowerCase().includes(textToSearch.toLowerCase())
@@ -15,7 +15,9 @@ const NewsContainer = () => {
     }
     return (
         <div className="grid divide-y-2 gap-6">
-            {FetchNews.length !== 0 ? (
+            {errorText ? (
+                <div>{errorText}</div>
+            ) : FetchNews.length !== 0 ? (
                 news.map(
                     (
                         {

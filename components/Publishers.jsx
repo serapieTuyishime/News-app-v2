@@ -2,7 +2,7 @@ import {
     useGetTopPublishersQuery,
     useLazyGetNewsByPublishersQuery,
 } from "@/services/news";
-import { loadPopuralNews } from "@/slices/news";
+import { loadPopuralNews, throwError } from "@/slices/news";
 import React from "react";
 import { useDispatch } from "react-redux";
 
@@ -14,8 +14,9 @@ const Publishers = () => {
 
     async function getNews(publisherId) {
         const NewsByPublisher = await trigger(publisherId);
-        dispatch(loadPopuralNews(NewsByPublisher));
-        console.log(NewsByPublisher);
+        if (NewsByPublisher.isError) {
+            dispatch(throwError(NewsByPublisher.error.message));
+        } else dispatch(loadPopuralNews(NewsByPublisher));
     }
     return (
         <div className="grid gap-3">

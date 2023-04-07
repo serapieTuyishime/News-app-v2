@@ -9,13 +9,11 @@ const PopuralNewsfetcher = ({ children }) => {
     const popuralNewsUrl = useSelector((state) => state.news.popuralNewsUrl);
 
     async function waitForDataToBeLoaded() {
-        try {
-            const allData = await trigger(popuralNewsUrl);
-            dispatch(loadPopuralNews(allData));
-        } catch (Error) {
-            console.log(Object.keys(Error));
-            dispatch(throwError("Error boom"));
-        }
+        const allData = await trigger(popuralNewsUrl);
+
+        if (allData.isError) {
+            dispatch(throwError(allData.error.data.message));
+        } else dispatch(loadPopuralNews(allData));
     }
 
     return <div onClick={() => waitForDataToBeLoaded()}>{children}</div>;
