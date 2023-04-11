@@ -42,7 +42,6 @@ export const newsSlice = createSlice({
     reducers: {
         loadPopuralNews: (state, action) => {
             state.popuralNews = action.payload;
-            console.log(state.popuralNews);
         },
         changeVisibilityOfFullAtricle: (state) => {
             state.isFullArticleVisible = !state.isFullArticleVisible;

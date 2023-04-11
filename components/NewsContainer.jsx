@@ -12,6 +12,8 @@ const NewsContainer = () => {
         news = FetchNews.filter((article) =>
             article.title.toLowerCase().includes(textToSearch.toLowerCase())
         );
+    } else {
+        news = FetchNews;
     }
     return (
         <div className="grid divide-y-2 gap-6">
@@ -47,11 +49,7 @@ const NewsContainer = () => {
                     }
                 )
             ) : (
-                <div>
-                    <span className="font-bold text-4xl">
-                        No news to display
-                    </span>
-                </div>
+                <span className="font-bold text-4xl">No news to display</span>
             )}
         </div>
     );

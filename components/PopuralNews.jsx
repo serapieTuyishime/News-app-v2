@@ -9,13 +9,9 @@ const PopuralNews = () => {
     const popuralNewsUrl = useSelector((state) => state.news.popuralNewsUrl);
     const [trigger] = useLazyGetPopuralArticlesQuery();
     const dispatch = useDispatch();
-    const FetchNews = useSelector(
-        (state) => state.news.popuralNews.data.articles
-    );
 
     async function waitForDataToBeLoaded() {
         const allData = await trigger(popuralNewsUrl);
-
         if (allData.isError) {
             dispatch(throwError(allData.error.data.message));
         } else {
