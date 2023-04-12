@@ -20,9 +20,8 @@ export const newsApi = createApi({
             query: () => `${NEWS_API_URL}/sources?apiKey=${API_KEY}`,
         }),
         getNewsByPublishers: builder.query({
-            query: (name) => {
-                `${NEWS_API_URL}/sources=${name}?apiKey=${API_KEY}`;
-            },
+            query: (name) =>
+                `${NEWS_API_URL}?sources=${name}&apiKey=${API_KEY}`,
         }),
     }),
 });

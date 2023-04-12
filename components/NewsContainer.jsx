@@ -19,7 +19,7 @@ const NewsContainer = () => {
         <div className="grid divide-y-2 gap-6">
             {errorText ? (
                 <div>{errorText}</div>
-            ) : FetchNews.length !== 0 ? (
+            ) : news.length !== 0 ? (
                 news.map(
                     (
                         {
@@ -42,6 +42,7 @@ const NewsContainer = () => {
                                     title={title}
                                     id={source.id}
                                     name={source.name}
+                                    source={source}
                                     publishedAt={publishedAt}
                                 />
                             </div>

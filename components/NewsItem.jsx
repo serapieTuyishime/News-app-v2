@@ -1,5 +1,5 @@
 import { useLazyGetNewsByPublishersQuery } from "@/services/news";
-import { loadNewsItemById, loadPopuralNews } from "@/slices/news";
+import { loadNewsItemById, loadPopuralNews, throwError } from "@/slices/news";
 import { useDispatch } from "react-redux";
 
 const NewsItem = ({
@@ -14,12 +14,13 @@ const NewsItem = ({
     const dispatch = useDispatch();
     const [trigger] = useLazyGetNewsByPublishersQuery();
     async function getNews(publisherId) {
-        const slugPublisherId = publisherId.toLowerCase().split(" ").join("-");
-        const NewsByPublisher = await trigger(slugPublisherId);
-        dispatch(loadPopuralNews(NewsByPublisher));
+        const NewsByPublisher = await trigger(publisherId);
+        if (NewsByPublisher.isError) {
+            dispatch(throwError(NewsByPublisher.error.message));
+        } else dispatch(loadPopuralNews(NewsByPublisher));
     }
     return (
-        <div className="flex w-full gap-3 p-2 overflow-hidden pb-3 mt-3 border-b-gray-300 rounded max-h-60 hover:cursor-pointer">
+        <div className="flex w-full gap-3 p-2 overflow-hidden pb-3 mt-3 border-b-gray-300 rounded max-h-60">
             <div className="grid w-3/5 gap-2">
                 <div className="flex justify-between">
                     <div className="flex items-center gap-3 ">
@@ -38,21 +39,20 @@ const NewsItem = ({
                     <div
                         className="cursor-pointer"
                         onClick={() => {
-                            getNews(name);
+                            getNews(id);
                         }}
                     >
-                        {name}
+                        {id}
                     </div>
                 </div>
                 <div
-                    className="grid gap-3"
+                    className="grid gap-3 cursor-pointer hover:bg-gray-100 p-3 rounded-md"
                     onClick={() => {
                         dispatch(loadNewsItemById(title));
                     }}
                 >
                     <span className="font-bold">{title.substring(0, 150)}</span>
                     <span className="">
-                        {/* {description.substring(0, 120)} ... */}
                         {description} ...
                         <span className="text-gray-400 pl-2 font-bold">
                             Road more
