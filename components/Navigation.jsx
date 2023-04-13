@@ -10,9 +10,9 @@ const Navigation = () => {
 
     const [searchText, setSearchText] = useState("");
     return (
-        <div className="flex gap-6 items-center py-6 max-w-7xl mx-auto justify-between">
+        <div className="grid md:flex gap-6 items-center py-6 max-w-7xl mx-auto justify-between">
             <Logo />
-            <div className="flex gap-6">
+            <div className="flex gap-6 flex-wrap md:flex-none">
                 {newsCategories.map((category, index) => {
                     return (
                         <Category
