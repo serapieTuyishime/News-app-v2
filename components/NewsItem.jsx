@@ -25,9 +25,16 @@ const NewsItem = ({
         if (typeof window !== "undefined") document.body.scrollTop = 0;
     };
     return (
-        <div className="flex w-full gap-3 p-2 overflow-hidden pb-3 mt-3 border-b-gray-300 rounded max-h-60">
-            <div className="grid w-3/5 gap-2">
-                <div className="flex justify-between">
+        <div className="md:flex grid w-full gap-3 p-2 overflow-hidden pb-3 mt-3 border-b-gray-300 rounded md:max-h-60">
+            <div className="h-3/4 md:h-full w-full md:w-2/5">
+                <img
+                    src={urlToImage}
+                    alt={title}
+                    className="rounded-3xl object-cover w-full h-full"
+                />
+            </div>
+            <div className="grid w-full md:w-3/5 gap-2 md:flex-1">
+                <div className="grid gap-4 md:flex justify-between">
                     <div className="flex items-center gap-3 ">
                         <img
                             src={urlToImage}
@@ -64,13 +71,6 @@ const NewsItem = ({
                         </span>
                     </span>
                 </div>
-            </div>
-            <div className="w-2/5">
-                <img
-                    src={urlToImage}
-                    alt={title}
-                    className="rounded-3xl object-cover w-full h-full"
-                />
             </div>
         </div>
     );
