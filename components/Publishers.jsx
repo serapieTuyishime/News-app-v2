@@ -40,7 +40,7 @@ const Publishers = () => {
                         })}
                 </div>
             ) : (
-                <div>No</div>
+                <div>Wait while the Site fetches publishers for you</div>
             )}
         </div>
     );
