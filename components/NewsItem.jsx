@@ -42,7 +42,7 @@ const NewsItem = ({
                             getNews(id);
                         }}
                     >
-                        {id}
+                        {name}
                     </div>
                 </div>
                 <div

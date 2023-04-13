@@ -1,6 +1,6 @@
 const TitleElement = ({ title }) => {
     return (
-        <div className="text-2xl font-semibold capitalize py-3">{title}</div>
+        <span className="text-2xl font-semibold capitalize py-3">{title}</span>
     );
 };
 

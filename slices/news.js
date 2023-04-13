@@ -1,10 +1,9 @@
-import { API_KEY, MAXIMUN_FETCH_SIZE, NEWS_API_URL } from "@/config/Variables";
 import { createSlice } from "@reduxjs/toolkit";
 
 export const newsSlice = createSlice({
     name: "news",
     initialState: {
-        popuralNewsUrl: `${NEWS_API_URL}?language=en&pageSize=${MAXIMUN_FETCH_SIZE}&apiKey=${API_KEY}`,
+        popuralNewsUrl: `${process.env.NEXT_PUBLIC_NEWS_API_URL}?language=en&pageSize=${process.env.NEXT_PUBLIC_MAXIMUN_FETCH_SIZE}&apiKey=${process.env.NEXT_PUBLIC_API_KEY}`,
         popuralNews: {
             data: {
                 articles: [

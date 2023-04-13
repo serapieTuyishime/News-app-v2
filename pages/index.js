@@ -3,6 +3,8 @@ import PopuralNews from "@/components/PopuralNews";
 import FullNewsItem from "@/components/FullNewsItem";
 import Navigation from "@/components/Navigation";
 import { useSelector } from "react-redux";
+import PopuralNewsfetcher from "@/components/HOC/PopuralNewsfetcher";
+import TitleElement from "@/components/TitleElement";
 
 export default function Home() {
     const isFullArticleVisible = useSelector(
@@ -25,7 +27,12 @@ export default function Home() {
                     </div>
                     <PopuralNews />
                 </div>
-                <div className="w-1/4 pl-2 hidden md:flex ">
+                <div className="w-1/4 pl-2 hidden md:grid gap-4">
+                    <div className="">
+                        <PopuralNewsfetcher>
+                            <TitleElement title="fetch popural news" />
+                        </PopuralNewsfetcher>
+                    </div>
                     <Publishers />
                 </div>
             </div>
