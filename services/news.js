@@ -19,9 +19,21 @@ export const newsApi = createApi({
             query: () =>
                 `${process.env.NEXT_PUBLIC_NEWS_API_URL}/sources?apiKey=${process.env.NEXT_PUBLIC_API_KEY}`,
         }),
+        getNewsByLanguage: builder.query({
+            query: (language) =>
+                `${process.env.NEXT_PUBLIC_NEWS_API_URL}?language=${language}&apiKey=${process.env.NEXT_PUBLIC_API_KEY}`,
+        }),
+        getNewsByCountry: builder.query({
+            query: (country) =>
+                `${process.env.NEXT_PUBLIC_NEWS_API_URL}?country=${country}&apiKey=${process.env.NEXT_PUBLIC_API_KEY}`,
+        }),
+        getNewsByCategory: builder.query({
+            query: (category) =>
+                `${process.env.NEXT_PUBLIC_NEWS_API_URL}?category=${category}&apiKey=${process.env.NEXT_PUBLIC_API_KEY}`,
+        }),
         getNewsByPublishers: builder.query({
-            query: (name) =>
-                `${process.env.NEXT_PUBLIC_NEWS_API_URL}?sources=${name}&apiKey=${process.env.NEXT_PUBLIC_API_KEY}`,
+            query: (publisher) =>
+                `${process.env.NEXT_PUBLIC_NEWS_API_URL}?sources=${publisher}&apiKey=${process.env.NEXT_PUBLIC_API_KEY}`,
         }),
     }),
 });
@@ -30,4 +42,7 @@ export const {
     useLazyGetPopuralArticlesQuery,
     useGetTopPublishersQuery,
     useLazyGetNewsByPublishersQuery,
+    useLazyGetNewsByCountryQuery,
+    useLazyGetNewsByLanguageQuery,
+    useLazyGetNewsByCategoryQuery,
 } = newsApi;

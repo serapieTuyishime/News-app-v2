@@ -16,7 +16,14 @@ const PopuralNewsfetcher = ({ children }) => {
         } else dispatch(loadPopuralNews(allData));
     }
 
-    return <div onClick={() => waitForDataToBeLoaded()}>{children}</div>;
+    return (
+        <div
+            className="cursor-pointer hover:bg-gray-100"
+            onClick={() => waitForDataToBeLoaded()}
+        >
+            {children}
+        </div>
+    );
 };
 
 export default PopuralNewsfetcher;

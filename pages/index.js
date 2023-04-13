@@ -5,6 +5,9 @@ import Navigation from "@/components/Navigation";
 import { useSelector } from "react-redux";
 import PopuralNewsfetcher from "@/components/HOC/PopuralNewsfetcher";
 import TitleElement from "@/components/TitleElement";
+import { countrycategories, languagecategories } from "@/mocks/categories";
+import Country from "@/components/ui/Country";
+import LanguageItem from "@/components/ui/LanguageItem";
 
 export default function Home() {
     const isFullArticleVisible = useSelector(
@@ -28,11 +31,32 @@ export default function Home() {
                     <PopuralNews />
                 </div>
                 <div className="w-1/4 pl-2 hidden md:grid gap-4">
-                    <div className="">
-                        <PopuralNewsfetcher>
-                            <TitleElement title="fetch popural news" />
-                        </PopuralNewsfetcher>
+                    <PopuralNewsfetcher>
+                        <TitleElement title="fetch popural news" />
+                    </PopuralNewsfetcher>
+                    <TitleElement title="Languages" />
+                    <div className="h-32 w-full  flex flex-wrap overflow-scroll gap-2">
+                        {languagecategories.map((language, index) => {
+                            return (
+                                <LanguageItem
+                                    text={language}
+                                    key={`${language}-${index}`}
+                                />
+                            );
+                        })}
                     </div>
+                    <TitleElement title="Countries" />
+                    <div className="h-32 w-full  flex flex-wrap overflow-scroll gap-2">
+                        {countrycategories.map((country, index) => {
+                            return (
+                                <Country
+                                    text={country}
+                                    key={`${country}-${index}`}
+                                />
+                            );
+                        })}
+                    </div>
+
                     <Publishers />
                 </div>
             </div>

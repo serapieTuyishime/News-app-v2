@@ -2,7 +2,8 @@ import { updateTextToSearchwith } from "@/slices/news";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Logo from "./ui/Logo";
-import { Tag } from "./ui/Tag";
+import { Category } from "./ui/Category";
+import { newsCategories } from "@/mocks/categories";
 
 const Navigation = () => {
     const dispatch = useDispatch();
@@ -12,7 +13,14 @@ const Navigation = () => {
         <div className="flex gap-6 items-center py-6 max-w-7xl mx-auto justify-between">
             <Logo />
             <div className="flex gap-6">
-                <Tag text="business" />
+                {newsCategories.map((category, index) => {
+                    return (
+                        <Category
+                            text={category}
+                            key={`${category}-${index}`}
+                        />
+                    );
+                })}
                 <input
                     type="search"
                     placeholder="Search by news articles "

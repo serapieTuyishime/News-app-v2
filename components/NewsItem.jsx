@@ -19,6 +19,11 @@ const NewsItem = ({
             dispatch(throwError(NewsByPublisher.error.message));
         } else dispatch(loadPopuralNews(NewsByPublisher));
     }
+
+    const loadFullAricle = (title) => {
+        dispatch(loadNewsItemById(title));
+        if (typeof window !== "undefined") document.body.scrollTop = 0;
+    };
     return (
         <div className="flex w-full gap-3 p-2 overflow-hidden pb-3 mt-3 border-b-gray-300 rounded max-h-60">
             <div className="grid w-3/5 gap-2">
@@ -48,7 +53,7 @@ const NewsItem = ({
                 <div
                     className="grid gap-3 cursor-pointer hover:bg-gray-100 p-3 rounded-md"
                     onClick={() => {
-                        dispatch(loadNewsItemById(title));
+                        loadFullAricle(title);
                     }}
                 >
                     <span className="font-bold">{title.substring(0, 150)}</span>

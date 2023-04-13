@@ -9,6 +9,7 @@ const PopuralNews = () => {
     const popuralNewsUrl = useSelector((state) => state.news.popuralNewsUrl);
     const [trigger] = useLazyGetPopuralArticlesQuery();
     const dispatch = useDispatch();
+    const currentcategory = useSelector((state) => state.news.activeCategory);
 
     async function waitForDataToBeLoaded() {
         const allData = await trigger(popuralNewsUrl);
@@ -24,7 +25,9 @@ const PopuralNews = () => {
     }, []);
     return (
         <div className="grid sm:w-3/4 mx-auto gap-4">
-            <TitleElement title="Popural news" />
+            <TitleElement
+                title={`Displaying news by ${currentcategory.category} : ${currentcategory.activeId}`}
+            />
             <NewsContainer />
         </div>
     );

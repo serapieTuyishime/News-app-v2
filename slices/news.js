@@ -37,6 +37,10 @@ export const newsSlice = createSlice({
         isFullArticleVisible: false,
         textToSearch: "",
         fetchingError: "",
+        activeCategory: {
+            category: "country",
+            activeId: "all",
+        },
     },
     reducers: {
         loadPopuralNews: (state, action) => {
@@ -57,6 +61,12 @@ export const newsSlice = createSlice({
         throwError: (state, action) => {
             state.fetchingError = action.payload;
         },
+        setCurrentcategory: (state, action) => {
+            state.activeCategory = {
+                category: action.payload.category,
+                activeId: action.payload.activeId,
+            };
+        },
     },
 });
 
@@ -66,5 +76,6 @@ export const {
     changeVisibilityOfFullAtricle,
     updateTextToSearchwith,
     throwError,
+    setCurrentcategory,
 } = newsSlice.actions;
 export default newsSlice.reducer;
