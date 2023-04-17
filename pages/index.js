@@ -21,9 +21,10 @@ export default function Home() {
                 <div className="md:hidden">
                     <Logo />
                 </div>
+                {/* mobile navigation */}
                 <label className="w-10 h-8 ml-auto sm:hidden">
                     {isNavigationVisible ? (
-                        /* The menu */
+                        /* The menu icon */
                         <span
                             onClick={() =>
                                 setisNavigationVisible(!isNavigationVisible)
@@ -38,7 +39,7 @@ export default function Home() {
                             </svg>
                         </span>
                     ) : (
-                        /* the cross */
+                        /* the cross icon*/
                         <span
                             onClick={() =>
                                 setisNavigationVisible(!isNavigationVisible)
@@ -63,8 +64,9 @@ export default function Home() {
                         </span>
                     )}
                 </label>
+                {/* mobile navigation ends here*/}
             </div>
-            <div className="flex items-start px-6 overflow-scroll">
+            <div id="news" className="flex items-start h-screen px-6">
                 <div className="grid w-full">
                     <PopuralNews />
                 </div>

@@ -41,40 +41,37 @@ const Publishers = () => {
             <h1 className="text-2xl uppercase">Top 10 Publishers of the day</h1>
             {AllPublishers.isSuccess ? (
                 <div className="grid">
-                    {AllPublishers.data.sources
-                        .slice(0, 30)
-                        .map((publisher) => {
-                            return (
-                                <div
-                                    className={`flex justify-between cursor-pointer ${
-                                        currentcategory.category ===
-                                            "publishers" &&
-                                        currentcategory.activeId ===
-                                            publisher.id
-                                            ? "border-gray-400 bg-gray-300"
-                                            : "border-gray-400"
-                                    } hover:bg-gray-100 p-3 rounded-2xl items-center`}
-                                    key={publisher.id}
-                                    onClick={() => {
-                                        getNews(publisher.id);
-                                    }}
-                                >
-                                    <div className="flex items-center gap-3 ">
-                                        <div className="grid">
-                                            <label className="font-bold">
-                                                {publisher.name}
-                                            </label>
-                                            <label className="text-sm italic">
-                                                country : {publisher.country}
-                                            </label>
-                                        </div>
+                    {AllPublishers.data.sources.map((publisher) => {
+                        return (
+                            <a
+                                href="#news"
+                                className={`flex justify-between cursor-pointer ${
+                                    currentcategory.category === "publishers" &&
+                                    currentcategory.activeId === publisher.id
+                                        ? "border-gray-400 bg-gray-300"
+                                        : "border-gray-400"
+                                } hover:bg-gray-100 p-3 rounded-2xl items-center`}
+                                key={publisher.id}
+                                onClick={() => {
+                                    getNews(publisher.id);
+                                }}
+                            >
+                                <div className="flex items-center gap-3 ">
+                                    <div className="grid">
+                                        <label className="font-bold">
+                                            {publisher.name}
+                                        </label>
+                                        <label className="text-sm italic">
+                                            country : {publisher.country}
+                                        </label>
                                     </div>
-                                    <label className="flex items-center px-3 border-2 border-gray-500 cursor-pointer rounded-2xl">
-                                        Visit
-                                    </label>
                                 </div>
-                            );
-                        })}
+                                <label className="flex items-center px-3 border-2 border-gray-500 cursor-pointer rounded-2xl">
+                                    Visit
+                                </label>
+                            </a>
+                        );
+                    })}
                 </div>
             ) : (
                 <div>Wait while the Site fetches publishers for you</div>
