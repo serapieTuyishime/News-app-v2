@@ -13,15 +13,15 @@ export default function Home() {
     const [isNavigationVisible, setisNavigationVisible] = useState(true);
 
     return (
-        <div className="grid gap-3 h-screen">
-            <div className="flex justify-between w-11/12 sm:w-full mx-auto">
-                <div className="top-0 sticky hidden sm:block">
+        <div className="grid h-screen gap-3">
+            <div className="flex justify-between w-11/12 mx-auto sm:w-full">
+                <div className="sticky top-0 hidden w-full sm:block">
                     <Navigation />
                 </div>
                 <div className="md:hidden">
                     <Logo />
                 </div>
-                <label className=" ml-auto h-8 w-10 sm:hidden">
+                <label className="w-10 h-8 ml-auto sm:hidden">
                     {isNavigationVisible ? (
                         /* The menu */
                         <span
@@ -64,16 +64,16 @@ export default function Home() {
                     )}
                 </label>
             </div>
-            <div className="flex px-6 items-start overflow-scroll">
+            <div className="flex items-start px-6 overflow-scroll">
                 <div className="grid w-full">
                     <PopuralNews />
                 </div>
                 <div
-                    className={`w-4/5 sm:w-1/4 pl-2 ${
+                    className={`w-4/5 sm:w-1/4 md:hidden gap-4 pl-2 ${
                         isNavigationVisible
-                            ? "bg-white z-10 absolute grid"
+                            ? "bg-blue-400 z-10 absolute grid "
                             : "hidden"
-                    } md:grid gap-4`}
+                    } `}
                 >
                     <div className="sm:hidden">
                         <Navigation />
@@ -82,7 +82,7 @@ export default function Home() {
                         <TitleElement title="Fetch popural news" />
                     </PopuralNewsfetcher>
                     <TitleElement title="Languages" />
-                    <div className="h-32 w-full  flex flex-wrap overflow-scroll gap-2">
+                    <div className="flex flex-wrap w-full h-32 gap-2 overflow-scroll">
                         {languagecategories.map((language, index) => {
                             return (
                                 <LanguageItem
@@ -93,7 +93,7 @@ export default function Home() {
                         })}
                     </div>
                     <TitleElement title="Countries" />
-                    <div className="h-32 w-full flex flex-wrap overflow-scroll gap-2">
+                    <div className="flex flex-wrap w-full h-32 gap-2 overflow-scroll">
                         {countrycategories.map((country, index) => {
                             return (
                                 <Country
@@ -106,6 +106,7 @@ export default function Home() {
 
                     <Publishers />
                 </div>
+                <Publishers />
             </div>
         </div>
     );

@@ -1,5 +1,10 @@
 import { useLazyGetNewsByLanguageQuery } from "@/services/news";
-import { loadPopuralNews, setCurrentcategory, throwError } from "@/slices/news";
+import {
+    changeIsfetchingStatus,
+    loadPopuralNews,
+    setCurrentcategory,
+    throwError,
+} from "@/slices/news";
 import { useDispatch, useSelector } from "react-redux";
 
 const LanguageItem = ({ text }) => {
@@ -8,7 +13,11 @@ const LanguageItem = ({ text }) => {
     const [trigger] = useLazyGetNewsByLanguageQuery();
     const dispatch = useDispatch();
     async function getNews(language) {
+        dispatch(changeIsfetchingStatus(true));
+
         const NewsByLanguage = await trigger(language);
+        dispatch(changeIsfetchingStatus(false));
+
         if (NewsByLanguage.isError) {
             dispatch(throwError(NewsByLanguage.error.message));
         } else {

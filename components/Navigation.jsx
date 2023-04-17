@@ -10,11 +10,11 @@ const Navigation = () => {
 
     const [searchText, setSearchText] = useState("");
     return (
-        <div className="grid md:flex gap-6 items-center py-6 max-w-7xl mx-auto justify-between">
+        <div className="grid items-center justify-between gap-6 py-6 mx-auto md:flex max-w-7xl">
             <div className="hidden md:flex">
                 <Logo />
             </div>
-            <div className="flex gap-6 flex-wrap md:flex-none">
+            <div className="flex flex-wrap gap-6 md:flex-none">
                 {newsCategories.map((category, index) => {
                     return (
                         <Category
@@ -26,7 +26,7 @@ const Navigation = () => {
                 <input
                     type="search"
                     placeholder="Search by news articles "
-                    className="rounded-3xl px-4 py-2 border outline-none border-gray-400"
+                    className="px-4 py-2 border border-gray-400 outline-none rounded-3xl"
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value)}
                     onKeyUp={(e) => {

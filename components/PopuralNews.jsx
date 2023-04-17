@@ -1,5 +1,9 @@
 import { useLazyGetPopuralArticlesQuery } from "@/services/news";
-import { loadPopuralNews, throwError } from "@/slices/news";
+import {
+    changeIsfetchingStatus,
+    loadPopuralNews,
+    throwError,
+} from "@/slices/news";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NewsContainer from "./NewsContainer";
@@ -12,7 +16,10 @@ const PopuralNews = () => {
     const currentcategory = useSelector((state) => state.news.activeCategory);
 
     async function waitForDataToBeLoaded() {
+        dispatch(changeIsfetchingStatus(true));
         const allData = await trigger(popuralNewsUrl);
+        dispatch(changeIsfetchingStatus(false));
+
         if (allData.isError) {
             dispatch(throwError(allData.error.data.message));
         } else {
@@ -24,7 +31,7 @@ const PopuralNews = () => {
         waitForDataToBeLoaded();
     }, []);
     return (
-        <div className="grid sm:w-3/4 mx-auto gap-4">
+        <div className="grid gap-4 mx-auto sm:w-3/4">
             <TitleElement
                 title={`Displaying news by ${currentcategory.category} : ${currentcategory.activeId}`}
             />

@@ -2,7 +2,12 @@ import {
     useGetTopPublishersQuery,
     useLazyGetNewsByPublishersQuery,
 } from "@/services/news";
-import { loadPopuralNews, setCurrentcategory, throwError } from "@/slices/news";
+import {
+    changeIsfetchingStatus,
+    loadPopuralNews,
+    setCurrentcategory,
+    throwError,
+} from "@/slices/news";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -14,7 +19,11 @@ const Publishers = () => {
     const currentcategory = useSelector((state) => state.news.activeCategory);
 
     async function getNews(publisherId) {
+        dispatch(changeIsfetchingStatus(true));
+
         const NewsByPublisher = await trigger(publisherId);
+        dispatch(changeIsfetchingStatus(false));
+
         if (NewsByPublisher.isError) {
             dispatch(throwError(NewsByPublisher.error.message));
         } else {
@@ -60,7 +69,7 @@ const Publishers = () => {
                                             </label>
                                         </div>
                                     </div>
-                                    <label className="cursor-pointer rounded-2xl flex items-center border-gray-500 border-2 px-3">
+                                    <label className="flex items-center px-3 border-2 border-gray-500 cursor-pointer rounded-2xl">
                                         Visit
                                     </label>
                                 </div>
