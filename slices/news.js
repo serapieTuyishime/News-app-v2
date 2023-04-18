@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const MAXIMUM_FETCH_SIZE = process.env.NEXT_PUBLIC_MAXIMUN_FETCH_SIZE;
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+
 export const newsSlice = createSlice({
     name: "news",
     initialState: {
-        popuralNewsUrl: `${process.env.NEXT_PUBLIC_NEWS_API_URL}?language=en&pageSize=${process.env.NEXT_PUBLIC_MAXIMUN_FETCH_SIZE}&apiKey=${process.env.NEXT_PUBLIC_API_KEY}`,
+        popuralNewsUrl: `?language=en&pageSize=${MAXIMUM_FETCH_SIZE}&apiKey=${API_KEY}`,
         popuralNews: {
             data: {
                 articles: [],
@@ -28,10 +31,12 @@ export const newsSlice = createSlice({
             activeId: "all",
         },
         isFetching: true,
+        isNavigationVisible: false,
     },
     reducers: {
         loadPopuralNews: (state, action) => {
             state.popuralNews = action.payload;
+            state.isNavigationVisible = false;
         },
         changeVisibilityOfFullAtricle: (state) => {
             state.isFullArticleVisible = !state.isFullArticleVisible;
@@ -57,6 +62,9 @@ export const newsSlice = createSlice({
         changeIsfetchingStatus: (state, action) => {
             state.isFetching = action.payload;
         },
+        changeNavigationVisibility: (state) => {
+            state.isNavigationVisible = !state.isNavigationVisible;
+        },
     },
 });
 
@@ -68,5 +76,6 @@ export const {
     throwError,
     setCurrentcategory,
     changeIsfetchingStatus,
+    changeNavigationVisibility,
 } = newsSlice.actions;
 export default newsSlice.reducer;

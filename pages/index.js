@@ -6,11 +6,16 @@ import TitleElement from "@/components/TitleElement";
 import { countrycategories, languagecategories } from "@/mocks/categories";
 import Country from "@/components/ui/Country";
 import LanguageItem from "@/components/ui/LanguageItem";
-import { useState } from "react";
 import Logo from "@/components/ui/Logo";
+import { useDispatch, useSelector } from "react-redux";
+import { changeNavigationVisibility } from "@/slices/news";
 
 export default function Home() {
-    const [isNavigationVisible, setisNavigationVisible] = useState(true);
+    const isNavigationVisible = useSelector(
+        (state) => state.news.isNavigationVisible
+    );
+
+    const dispatch = useDispatch();
 
     return (
         <div className="grid h-screen gap-3">
@@ -21,13 +26,12 @@ export default function Home() {
                 <div className="md:hidden">
                     <Logo />
                 </div>
-                {/* mobile navigation */}
                 <label className="w-10 h-8 ml-auto sm:hidden">
                     {isNavigationVisible ? (
                         /* The menu icon */
                         <span
                             onClick={() =>
-                                setisNavigationVisible(!isNavigationVisible)
+                                dispatch(changeNavigationVisibility())
                             }
                         >
                             <svg
@@ -42,7 +46,7 @@ export default function Home() {
                         /* the cross icon*/
                         <span
                             onClick={() =>
-                                setisNavigationVisible(!isNavigationVisible)
+                                dispatch(changeNavigationVisibility())
                             }
                         >
                             <svg
@@ -55,21 +59,21 @@ export default function Home() {
                                         id="Vector"
                                         d="M11 17H19M5 12H19M11 7H19"
                                         stroke="#000000"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
                                     />
                                 </g>
                             </svg>
                         </span>
                     )}
                 </label>
-                {/* mobile navigation ends here*/}
             </div>
             <div id="news" className="flex items-start h-screen px-6">
                 <div className="grid w-full">
                     <PopuralNews />
                 </div>
+                {/* mobile navigation */}
                 <div
                     className={`w-4/5 sm:w-1/4 md:hidden gap-4 pl-2 ${
                         isNavigationVisible
@@ -84,7 +88,7 @@ export default function Home() {
                         <TitleElement title="Fetch popural news" />
                     </PopuralNewsfetcher>
                     <TitleElement title="Languages" />
-                    <div className="flex flex-wrap w-full h-32 gap-2 overflow-scroll">
+                    <div className="flex flex-wrap w-full gap-2 overflow-scroll">
                         {languagecategories.map((language, index) => {
                             return (
                                 <LanguageItem
@@ -108,7 +112,38 @@ export default function Home() {
 
                     <Publishers />
                 </div>
-                <Publishers />
+                {/* mobile navigation end here */}
+                <div className="flex flex-col w-1/4 h-screen">
+                    <div className="grid h-48">
+                        <TitleElement title="Languages" />
+                        <div className="flex flex-wrap items-center gap-2 overflow-scroll ">
+                            {languagecategories.map((language, index) => {
+                                return (
+                                    <LanguageItem
+                                        text={language}
+                                        key={`${language}-${index}`}
+                                    />
+                                );
+                            })}
+                        </div>
+                    </div>
+                    <div className="grid h-1/4">
+                        <TitleElement title="Countries" />
+                        <div className="flex flex-wrap gap-2 overflow-scroll">
+                            {countrycategories.map((country, index) => {
+                                return (
+                                    <Country
+                                        text={country}
+                                        key={`${country}-${index}`}
+                                    />
+                                );
+                            })}
+                        </div>
+                    </div>
+                    <div className="flex-grow overflow-scroll">
+                        <Publishers />
+                    </div>
+                </div>
             </div>
         </div>
     );

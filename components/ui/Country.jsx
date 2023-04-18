@@ -12,10 +12,9 @@ const Country = ({ text }) => {
 
     const [trigger] = useLazyGetNewsByCountryQuery();
     const dispatch = useDispatch();
-    async function getNews(language) {
+    async function getNews() {
         dispatch(changeIsfetchingStatus(true));
-
-        const NewsByLanguage = await trigger(language);
+        const NewsByLanguage = await trigger(text);
         dispatch(changeIsfetchingStatus(false));
 
         if (NewsByLanguage.isError) {
@@ -29,7 +28,7 @@ const Country = ({ text }) => {
     }
     return (
         <label
-            onClick={() => getNews(text)}
+            onClick={() => getNews()}
             className={`px-3 border-2 hover:bg-gray-100 cursor-pointer rounded-2xl ${
                 currentcategory.category === "country" &&
                 currentcategory.activeId === text
