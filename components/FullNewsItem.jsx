@@ -19,7 +19,7 @@ const FullNewsItem = () => {
         content,
     } = currentNewsitem;
     return (
-        <div className="grid w-full mx-auto px-6 h-full">
+        <div className="grid w-full px-6 h-full">
             <div className={`flex flex-col gap-4 overflow-hidden`}>
                 <label className="text-xl font-bold">{title}</label>
                 <div className="grid">
@@ -42,16 +42,6 @@ const FullNewsItem = () => {
                     {content.split("…")[0]}{" "}
                     <CustomLink linkingTo={url} newPage text="Road more" />
                 </div>
-            </div>
-            <div className="bg-gradient-to-b from-white to-gray-400 h-[20%] grid place-content-center">
-                <label
-                    className={`bg-green-300 rounded-full p-4  ${
-                        isFullArticleVisible && "rotate-180"
-                    }`}
-                    onClick={() => dispatch(changeVisibilityOfFullAtricle())}
-                >
-                    🔼
-                </label>
             </div>
         </div>
     );

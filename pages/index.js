@@ -9,16 +9,29 @@ import LanguageItem from "@/components/ui/LanguageItem";
 import Logo from "@/components/ui/Logo";
 import { useDispatch, useSelector } from "react-redux";
 import { changeNavigationVisibility } from "@/slices/news";
+import FullNewsItem from "@/components/FullNewsItem";
 
 export default function Home() {
     const isNavigationVisible = useSelector(
         (state) => state.news.isNavigationVisible
     );
+    const isFullArticleVisible = useSelector(
+        (state) => state.news.isFullArticleVisible
+    );
 
     const dispatch = useDispatch();
 
     return (
-        <div className="grid h-screen gap-3">
+        <div className="grid h-screen relative gap-3">
+            <div
+                className={`absolute h-screen w-screen grid place-content-center bg-black bg-opacity-30 z-30 ${
+                    !isFullArticleVisible && "hidden"
+                }`}
+            >
+                <div className="h-4/5 w-4/5 mx-auto mt-auto bg-white">
+                    <FullNewsItem />
+                </div>
+            </div>
             <div className="flex justify-between w-11/12 mx-auto sm:w-full">
                 <div className="sticky top-0 hidden w-full sm:block">
                     <Navigation />

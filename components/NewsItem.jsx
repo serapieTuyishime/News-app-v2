@@ -1,5 +1,10 @@
 import { useLazyGetNewsByPublishersQuery } from "@/services/news";
-import { loadNewsItemById, loadPopuralNews, throwError } from "@/slices/news";
+import {
+    changeVisibilityOfFullAtricle,
+    loadNewsItemById,
+    loadPopuralNews,
+    throwError,
+} from "@/slices/news";
 import { useDispatch } from "react-redux";
 
 const NewsItem = ({
@@ -22,10 +27,15 @@ const NewsItem = ({
 
     const loadFullAricle = (title) => {
         dispatch(loadNewsItemById(title));
-        if (typeof window !== "undefined") document.body.scrollTop = 0;
+        dispatch(changeVisibilityOfFullAtricle());
     };
     return (
-        <div className="md:flex grid w-full gap-3 p-2 overflow-hidden pb-3 mt-3 border-b-gray-300 rounded md:max-h-60">
+        <div
+            onClick={() => {
+                loadFullAricle(title);
+            }}
+            className="md:flex grid w-full gap-3 p-2 overflow-hidden pb-3 mt-3 border-b-gray-300 rounded md:max-h-60"
+        >
             <div className="h-3/4 md:h-full w-full md:w-2/5">
                 <img
                     src={urlToImage}
@@ -57,12 +67,7 @@ const NewsItem = ({
                         {name}
                     </div>
                 </div>
-                <div
-                    className="grid gap-3 cursor-pointer hover:bg-gray-100 p-3 rounded-md"
-                    onClick={() => {
-                        loadFullAricle(title);
-                    }}
-                >
+                <div className="grid gap-3 cursor-pointer hover:bg-gray-100 p-3 rounded-md">
                     <span className="font-bold">{title.substring(0, 150)}</span>
                     <span className="">
                         {description} ...
