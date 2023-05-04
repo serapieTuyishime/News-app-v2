@@ -1,32 +1,48 @@
-import Image from "next/image";
-import React from "react";
+import { changeVisibilityOfFullAtricle } from "@/slices/news";
+import { useDispatch, useSelector } from "react-redux";
+import CustomLink from "./ui/CustomLink";
 
-const FullNewsItem = ({
-    title,
-    source,
-    author,
-    description,
-    url,
-    urlToImage,
-    publishedAt,
-    content,
-}) => {
+const FullNewsItem = () => {
+    const currentNewsitem = useSelector((state) => state.news.currentNewsitem);
+    const isFullArticleVisible = useSelector(
+        (state) => state.news.isFullArticleVisible
+    );
+    const dispatch = useDispatch();
+    const {
+        title,
+        source,
+        author,
+        description,
+        url,
+        urlToImage,
+        publishedAt,
+        content,
+    } = currentNewsitem;
     return (
-        <div className="grid gap-4">
-            <label className="font-bold text-xl">{title}</label>
-            <div className="grid">
-                <label className="text-light">BY {author}</label>
-                <label className="text-light">Updated on {publishedAt}</label>
+        <div className="grid w-full px-6 h-full">
+            <div className={`flex flex-col gap-4 overflow-hidden`}>
+                <label className="text-xl font-bold">{title}</label>
+                <div className="grid">
+                    <label className="font-light">BY {author}</label>
+                    <label className="font-light ">
+                        Updated on {publishedAt}
+                    </label>
+                </div>
+                <div className="h-2/3">
+                    <img
+                        src={urlToImage}
+                        className="object-cover w-full h-full"
+                        alt={title}
+                        width={400}
+                        height={200}
+                    />
+                </div>
+                <label className="italic font-light">{description}</label>
+                <div className="">
+                    {content.split("…")[0]}{" "}
+                    <CustomLink linkingTo={url} newPage text="Road more" />
+                </div>
             </div>
-            <div className="h-[20rem] w-full">
-                <Image
-                    src={url}
-                    className="w-full h-full object-cover"
-                    alt={source.id ? source.id : title}
-                />
-                <label className="text-light italic">{description}</label>
-            </div>
-            <div>{content}</div>
         </div>
     );
 };

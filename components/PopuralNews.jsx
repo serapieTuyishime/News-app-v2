@@ -1,37 +1,41 @@
 import { useLazyGetPopuralArticlesQuery } from "@/services/news";
-import React from "react";
-import { useSelector } from "react-redux";
+import {
+    changeIsfetchingStatus,
+    loadPopuralNews,
+    throwError,
+} from "@/slices/news";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import NewsContainer from "./NewsContainer";
+import TitleElement from "./TitleElement";
 
 const PopuralNews = () => {
     const popuralNewsUrl = useSelector((state) => state.news.popuralNewsUrl);
-    const popuralNews = useSelector((state) => state.news.popuralNews);
-    const [trigger, AllNews] = useLazyGetPopuralArticlesQuery();
-    return (
-        <div>
-            {
-                AllNews.status === "uninitialized" ? (
-                    <button
-                        onClick={() => trigger(popuralNewsUrl)}
-                        className="bg-red-400 px-3 py-1"
-                    >
-                        Fetch news
-                    </button>
-                ) : AllNews.status === "fulfilled" ? (
-                    <div>
-                        {/* {JSON.stringify(
-                            Object.values(AllNews.data.articles[0])
-                        )} */}
-                        <br />
-                        <NewsContainer
-                            news={AllNews.data.articles.slice(0, 10)}
-                        />
-                    </div>
-                ) : null
+    const [trigger] = useLazyGetPopuralArticlesQuery();
+    const dispatch = useDispatch();
+    const currentcategory = useSelector((state) => state.news.activeCategory);
 
-                // <div>{JSON.stringify(AllNews)}</div>
-            }
-            <NewsContainer news={popuralNews.articles} />
+    async function waitForDataToBeLoaded() {
+        dispatch(changeIsfetchingStatus(true));
+        const allData = await trigger(popuralNewsUrl);
+        dispatch(changeIsfetchingStatus(false));
+
+        if (allData.isError) {
+            dispatch(throwError(allData.error.data.message));
+        } else {
+            dispatch(loadPopuralNews(allData));
+        }
+    }
+
+    useEffect(() => {
+        waitForDataToBeLoaded();
+    }, []);
+    return (
+        <div className="grid gap-4 mx-auto sm:w-3/4">
+            <TitleElement
+                title={`Displaying news by ${currentcategory.category} : ${currentcategory.activeId}`}
+            />
+            <NewsContainer />
         </div>
     );
 };

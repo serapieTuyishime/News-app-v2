@@ -1,38 +1,81 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const MAXIMUM_FETCH_SIZE = process.env.NEXT_PUBLIC_MAXIMUN_FETCH_SIZE;
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+
 export const newsSlice = createSlice({
     name: "news",
     initialState: {
-        popuralNewsUrl:
-            "https://newsapi.org/v2/everything?q=apple&from=2023-03-27&to=2023-03-27&sortBy=popularity&apiKey=4f0b70fd7dd84b25837caa68f5b8d053",
+        popuralNewsUrl: `?language=en&pageSize=${MAXIMUM_FETCH_SIZE}&apiKey=${API_KEY}`,
         popuralNews: {
-            articles: [
-                {
-                    author: "Jack rowlings",
-                    content:
-                        "Togg-PrototypDer ehemalige Bosch-Manager Gürcan Karakas hat das Vertrauen des türkischen Staates und großer Unternehmen.(Foto: picture alliance / AA) Istanbul Die Erwartungen an das erste Elektr… [+1160 chars]",
-                    description:
-                        "Mit dem Togg T10X soll die türkische Autoindustrie international konkurrenzfähig werden. Das Modell kann nun bestellt werden. Es ist digital ausgestattet, aber auch teuer.",
-                    publishedAt: "2023-03-20T06:20:48Z",
-                    source: { id: "handelsblatt", name: "Handelsblatt" },
-                    title: "Elektromobilität: Türkischer Tesla-Herausforderer wird teurer als erwartet",
-                    url: "https://www.handelsblatt.com/unternehmen/industrie/elektro-suv-von-togg-tesla-herausforderer-wird-teurer-als-erwartet/29042788.html",
-                    urlToImage:
-                        "https://www.handelsblatt.com/images/togg-prototyp/28542374/4-format2003.jpg",
-                },
-            ],
+            data: {
+                articles: [],
+            },
         },
+        currentNewsitem: {
+            title: "None",
+            source: { id: "234", name: "No name" },
+            author: "None",
+            description: "None",
+            url: "https://www.handelsblatt.com/unternehmen/industrie/elektro-suv-von-togg-tesla-herausforderer-wird-teurer-als-erwartet/29042788.html",
+            urlToImage:
+                "https://www.handelsblatt.com/images/togg-prototyp/28542374/4-format2003.jpg",
+            publishedAt: "12-12-1200",
+            content: "None",
+        },
+        isFullArticleVisible: false,
+        textToSearch: "",
+        fetchingError: "",
+        activeCategory: {
+            category: "country",
+            activeId: "all",
+        },
+        isFetching: true,
+        isNavigationVisible: false,
     },
     reducers: {
-        add: (state, action) => {
-            state.popuralNewsUrl = "/";
-        },
         loadPopuralNews: (state, action) => {
-            let returnedNews = action.payload;
-            state.popuralNews = Object.keys(returnedNews.data);
+            state.popuralNews = action.payload;
+            state.isNavigationVisible = false;
+        },
+        changeVisibilityOfFullAtricle: (state) => {
+            state.isFullArticleVisible = !state.isFullArticleVisible;
+        },
+        loadNewsItemById: (state, action) => {
+            state.currentNewsitem = state.popuralNews.data.articles.filter(
+                (newsItem) => newsItem.title === action.payload
+            )[0];
+            state.isFullArticleVisible = true;
+        },
+        updateTextToSearchwith: (state, action) => {
+            state.textToSearch = action.payload;
+        },
+        throwError: (state, action) => {
+            state.fetchingError = action.payload;
+        },
+        setCurrentcategory: (state, action) => {
+            state.activeCategory = {
+                category: action.payload.category,
+                activeId: action.payload.activeId,
+            };
+        },
+        changeIsfetchingStatus: (state, action) => {
+            state.isFetching = action.payload;
+        },
+        changeNavigationVisibility: (state) => {
+            state.isNavigationVisible = !state.isNavigationVisible;
         },
     },
 });
 
-export const { add, loadPopuralNews } = newsSlice.actions;
+export const {
+    loadPopuralNews,
+    loadNewsItemById,
+    changeVisibilityOfFullAtricle,
+    updateTextToSearchwith,
+    throwError,
+    setCurrentcategory,
+    changeIsfetchingStatus,
+    changeNavigationVisibility,
+} = newsSlice.actions;
 export default newsSlice.reducer;
